@@ -1,1 +1,48 @@
+<!DOCTYPE html>
 
+<head>
+<script src="js/jquery-1.10.2.js"></script>
+<script>
+$(document).ready(function(){
+	$("#transfer").click(function(){
+		s1 = $("#t1").val()
+		linesArray = s1.split("\n")
+		rs = ""
+		log = ""
+		for (var i = 0; i < linesArray.length; i++) {
+			line = linesArray[i]
+			oldStr = line
+			line = line.replace(new RegExp("<b>", "gm"), "<strong>")
+			line = line.replace(new RegExp("</b>", "gm"), "</strong>")
+			line = line.replace(new RegExp("<i>", "gm"), "<em>")
+			line = line.replace(new RegExp("</i>", "gm"), "</em>")
+			line = line.replace(new RegExp("<span>", "gm"), "<p>")
+			line = line.replace(new RegExp("</span>", "gm"), "</p>")
+			line = line.replace(new RegExp("(<pre>)|(</pre>)|(<center>)|(</center>)|(<u>)|(</u>)", "gm"), "")
+			rs += line + "\n"
+			if (oldStr != line) log += "line " + (i+1) + ": " + oldStr + " -----> " + line + "\n"
+		}		
+		$("#t2").val(rs)
+		if (log != "") $("#t3").text(log)
+	})
+})
+</script>
+</head>
+<div>
+<textarea id="t1" cols=50 rows=10>
+</textarea>
+</div>
+<div>
+<button type="button" id="transfer">transfer</button>
+</div>
+<div>
+<textarea id="t2" cols=50 rows=10>
+</textarea>
+</div>
+<div>
+logs</br>
+<textarea id="t3" disabled="disabled" cols=50 rows=10>
+</textarea>
+</div>
+
+</html>
