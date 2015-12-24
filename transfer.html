@@ -19,6 +19,7 @@ $(document).ready(function(){
 			line = line.replace(new RegExp("<span>", "gm"), "<p>")
 			line = line.replace(new RegExp("</span>", "gm"), "</p>")
 			line = line.replace(new RegExp("(<pre>)|(</pre>)|(<center>)|(</center>)|(<u>)|(</u>)", "gm"), "")
+			line = line.replace(new RegExp("selected_score=\"[^\"]*\"", "gm"), "selected_score=\"1\"")
 			rs += line + "\n"
 			if (oldStr != line) log += "line " + (i+1) + ": " + oldStr + " -----> " + line + "\n"
 		}		
