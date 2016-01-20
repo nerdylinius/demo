@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>Color Guessing Game</title>
+</head>
+<body>
+  <script>
+  var target;
+  var colorList = ["AliceBlue","Aquamarine","LavenderBlush","LightPink","WhiteSmoke"];
+  var colorList_sorted =colorList.sort()
+  var visitor_input;
+  var position;
+  var finished = false;   
+  var guesses = 0;
+    
+  function do_game(){
+    target = Math.floor(Math.random()*colorList.length)
+    console.log(target)
+    
+    while (!finished) {
+      visitor_input = prompt("I am thinking of these colors:\n"+
+                                  colorList_sorted +
+                                  "What color am I thinking of?");
+      position = colorList_sorted.indexOf(visitor_input);
+      console.log(position)
+      guesses += 1;   
+      finished = check_guess();
+    }    
+  }
+  function check_guess() {
+    if (position == -1 ) {
+        alert("Sorry, I don't recognize your color\n\n" +
+              "Please try again.");
+        return false;
+    }
+    if (position > target){
+        alert("Sorry, your guess is not correct!\n\n"+
+              "Hint: Your color is alphabetically higher than mine.\n\n" +
+              "Please try again.");
+        return false;
+    }
+    if (position < target){
+        alert("Sorry, your guess is not correct!\n\n"+
+              "Hint: Your color is alphabetically lower than mine.\n\n" +
+              "Please try again.");
+        return false;
+    }
+    if (position == target){
+        myBody=document.getElementsByTagName("body")[0];
+                myBody.style.background = target;
+    }
+    alert("Congratulations! You have guessed the color!" + 
+          ".\n\nIt took you " + guesses + 
+          " guesses to get the number!");
+    return true; 
+  }
+  do_game()
+  </script>
+</body>
+</html>
